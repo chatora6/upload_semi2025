@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../css/style.css">
   <title>アップロードフォーム</title>
 </head>
 <body>
@@ -30,18 +30,20 @@
   
     
     <tr><th><a>ファイル表示名</a></th>
-    <td><input type="text" name="summary" class="form" required></td></tr>
-    
+    <td><input type="text" name="summary[]" class="form" required></td></tr>
+  
   </table>
   <div class="up_container">
   <br>
     <input type="submit" value="アップロード" class="up_btn">
+  </form>
     <div class="list_btn">
-    <a href="./show.php"  >一覧へ</a>
+
+    <a href="show.php">一覧へ</a>
     </div>
   </div>
   
-  </form>
+  
   </div>
 </div>
 
