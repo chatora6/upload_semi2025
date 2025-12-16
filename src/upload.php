@@ -8,38 +8,45 @@
 <body>
   
 <?php 
-echo '<div class="upload_text">';
-$time= date('y-m-d h-i-s');
-$summary=$_POST['summary'] ?? '';//ファイル説明の習得
-//foreach ($_FILES['files']['name'] as $key => $upload_file) {
+require_once 'process_data.php';
 
-  $upload = '../file/'.$_FILES['files']['name'][$key]; //ファイルの保存先指定
-  $upload_file = $_FILES['files']['name'][$key];//習得ファイルの名前
-  $ext = pathinfo($upload_file,PATHINFO_EXTENSION);//拡張子を習得
-  $tempfile=$_FILES['files']['tmp_name'][$key];//サーバに一時保存
-  $md=substr(md5($time.$upload_file),16,8);//ハッシュ関数
-  $md_csv=$md.'.pdf';
-  $md_='../file/'.$md.'.pdf';
-  $file_csv = "../csv/file.csv";
-  $file2_csv = fopen($file_csv, "a");//ファイルに追記
-  if(is_uploaded_file($tempfile)){ //アップロードが出来たかどうか
-    $rest = array( 'pdf' );;
-    $ext= strtolower(pathinfo($upload,PATHINFO_EXTENSION));//拡張子の小文字変換 ,拡張子のみを取得
-    $maxSize = 20 * 1024 * 1024; //ファイルの上限指定
-    if(in_array( $ext, $rest ) && $_FILES['files']['size'] < $maxSize){
-      if(move_uploaded_file($tempfile, $md_)){//指定の場所に移動
-        fputcsv($file2_csv, [$md_csv, $summary]);
-        
-        echo '<h3>アップロード完了しました</h3>';
-      }
-    }else{
-      echo '<h3>20MBまでのpdfファイルのみアップロードできます</h3>'; 
-    } 
+// クラスのインスタンス化
+$uploader = new FileUploader();
 
-}else{
-  echo '<h3>アップロード失敗しました</h3>'; 
+if (isset($_FILES['files'])) {
+  $count = count($_FILES['files']['name']);
+
+  for ($i = 0; $i < $count; $i++) {
+    if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
+      continue;
+    }
+
+    $fileData = [
+      'name'     => $_FILES['files']['name'][$i],
+      'type'     => $_FILES['files']['type'][$i],
+      'tmp_name' => $_FILES['files']['tmp_name'][$i],
+      'error'    => $_FILES['files']['error'][$i],
+      'size'     => $_FILES['files']['size'][$i],
+    ];
+
+    $summary = $_POST['summary'][$i] ?? '';
+    
+    // クラスのメソッド呼び出し
+    $result = $uploader->Upload($fileData, $summary);
+    $fileName = htmlspecialchars($fileData['name']);
+
+    // 結果の判定
+    if ($result === true) {
+        echo '<h3>'.$fileName.'アップロード完了しました</h3>';
+    } else {
+        // エラーメッセージを表示
+        echo '<h3 style="color:red;">' .$fileName.$result. '</h3>';
+    }
+  }
+
+} else {
+  echo '<h3>ファイルが送信されていません。</h3>';
 }
-echo '</div>';
 
 ?>
 

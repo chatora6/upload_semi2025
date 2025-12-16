@@ -10,10 +10,10 @@
 <?php
    
     $delete_file =$_POST['delete'];//削除するファイル
-    $filepath='./file/'.$delete_file;
+    $filepath='../file/'.$delete_file;
 
-    $csvfile = 'file.csv';//現在のcsvファイル
-    $csvfile_tmp = 'file_tmp.csv';//一時保存するcsvファイル
+    $csvfile = '../csv/file.csv';//現在のcsvファイル
+    $csvfile_tmp = '../csv/file_tmp.csv';//一時保存するcsvファイル
 
     $file_csv=fopen($csvfile,"r");//読み込み
     $filetmp_csv=fopen($csvfile_tmp,"w");//書き込み
