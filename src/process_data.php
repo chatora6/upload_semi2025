@@ -9,7 +9,7 @@ class FileUploader
   private $maxSize = 20 * 1024 * 1024; 
 
   
-  public function upload($file, $summary,$genre){
+  public function upload($file, $summary,$genre,$i = 0){
     //エラーの場合
     if(!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])||$file['error'] !== UPLOAD_ERR_OK){ 
       return "アップロードに失敗しました。"; 
@@ -40,7 +40,7 @@ class FileUploader
 
     //$time= date('Y-m-d h-i-s');
     //ハッシュ化し15桁目から8桁取得
-    $newNameBase=substr(md5($uploadedTime.$uploadedName),16,8);
+    $newNameBase=substr(md5($uploadedTime.$uploadedName.$i),16,8);
     $newName = $newNameBase . '.pdf';
     $mdFile=$this->uploadPath . $newName;
 
