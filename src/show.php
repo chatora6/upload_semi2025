@@ -17,7 +17,21 @@ $targetGenre = $_GET['genre'] ?? 'すべて';
 //$csv_path= '../csv/file.csv';
 $csvData = getData();
 
-echo '<h2>表示中: ' . htmlspecialchars($target_genre) . '</h2>';
+//URLパラメータから受け取る
+$sort = $_GET['sort'] ?? 'new';
+
+//並び替え関数
+usort($csvData, 'fileSort');
+
+echo '<h2>表示中: ' . htmlspecialchars($targetGenre) . '</h2>';
+
+echo '<select id="sort-select" onchange="changeSort(this.value)">';
+    echo '<option value="new" ' . ($sort == 'new' ? 'selected' : '') . '>新しい順</option>';
+    echo '<option value="old" ' . ($sort == 'old' ? 'selected' : '') . '>古い順</option>';
+    echo '<option value="summary_asc" ' . ($sort == 'summary_asc' ? 'selected' : '') . '>説明(昇順)</option>';
+    echo '<option value="summary_desc" ' . ($sort == 'summary_desc' ? 'selected' : '') . '>説明(降順)</option>';
+echo '</select>';
+
 echo '<div class="list" style="margin-top:70px;">';
     echo '<div style="width:40%">ファイル説明</div>';
     echo '<div style="width:20%">ジャンル</div>';
@@ -40,6 +54,8 @@ foreach($csvData as $i => $file_path){
     $fileGenre = $info['genre'] ?? '';
     $fileTime = $info['time'] ?? '';
 
+    $downloadName = $fileSummary.'.pdf';
+    $filePath = "../file/" . $fileName;
     //すべて表示でないときとジャンルが一致しないときはスキップ
     if($targetGenre !== 'すべて' && $fileGenre !== $targetGenre){
         continue;
@@ -50,7 +66,7 @@ foreach($csvData as $i => $file_path){
         echo '<div style="width:20%">' . htmlspecialchars($fileGenre) .htmlspecialchars($fileTime). '</div>'; // ジャンル
 
         echo '<div style="width:20%">';
-        echo '<a href="' . $fileName . '" download="' . $fileSummary . '">ダウンロード</a>';
+        echo '<a href="' . $filePath . '" download="' . htmlspecialchars($downloadName). '">ダウンロード</a>';
         echo '</div>';
         
         echo '<div style="width:20%">';
@@ -67,7 +83,13 @@ foreach($csvData as $i => $file_path){
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    $(function() {
+function changeSort(sortVal) {
+    const genre = "<?php echo htmlspecialchars($targetGenre); ?>";
+    window.location.href = "show.php?sort=" + sortVal + "&genre=" + encodeURIComponent(genre);
+}
+
+
+$(function() {
     $('.delete-form').on('submit', function(e) {
         e.preventDefault(); 
 
