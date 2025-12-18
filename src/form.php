@@ -20,11 +20,12 @@ include 'menu.php';
     <tr><th><a>ジャンル</a></jth>
     <td><select name="genre[]">
       <option value="">選択してください</option>
-      <option value="業務">業務マニュアル・手順書</option>
-      <option value="教育">研修・教育資料</option>
-      <option value="ルール">店舗ルール</option>
+      <option value="業務マニュアル・手順書">業務マニュアル・手順書</option>
+      <option value="研修・教育資料">研修・教育資料</option>
+      <option value="店舗ルール">店舗ルール</option>
       <option value="本部共有資料">本部共有資料</option>
       <option value="レシピ">レシピ</option>
+      <option value="その他">その他</option>
     </select></td></tr>
 
     

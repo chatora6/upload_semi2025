@@ -12,9 +12,12 @@
 include 'menu.php';
 require_once 'get_csv.php';
 
+$target_genre = $_GET['genre'] ?? 'すべて';
+
 //$csv_path= '../csv/file.csv';
 $csv_data = GetData();
 
+echo '<h2>表示中: ' . htmlspecialchars($target_genre) . '</h2>';
 echo '<div class="list" style="margin-top:70px;">';
     echo '<div style="width:40%">ファイル説明</div>';
     echo '<div style="width:20%">ジャンル</div>';
@@ -31,6 +34,12 @@ foreach($files as $file_path){
     $info = $csv_data[$file_name] ?? ['summary' => '説明なし', 'genre' => '未分類'];
     $file_summary = $info['summary'] ?? '';
     $file_genre = $info['genre'] ?? '';
+
+    //すべて表示でないときとジャンルが一致しないときはスキップ
+    if($target_genre !== 'すべて' && $file_genre !== $target_genre){
+        continue;
+    }
+
     echo '<div class="list">';
         echo '<div style="width:40%">' . htmlspecialchars($file_summary) . '</div>'; // 説明
         echo '<div style="width:20%">' . htmlspecialchars($file_genre) . '</div>'; // ジャンル
