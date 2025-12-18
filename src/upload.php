@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../css/style.css">
-    <title>ファイル一覧</title>
-</head>
-<body>
-  
 <?php 
 require_once 'process_data.php';
 
@@ -30,30 +21,32 @@ if (isset($_FILES['files'])) {
     ];
 
     $summary = $_POST['summary'][$i] ?? '';
-    
+    $genre = $_POST['genre'][$i] ?? '未分類';
+
     // クラスのメソッド呼び出し
-    $result = $uploader->Upload($fileData, $summary);
+    $result = $uploader->Upload($fileData, $summary,$genre);
     $fileName = htmlspecialchars($fileData['name']);
 
     // 結果の判定
     if ($result === true) {
-        echo '<h3>'.$fileName.'アップロード完了しました</h3>';
+        //echo '<h3>'.$fileName.'アップロード完了しました</h3>';
+        $results[] = "アップロード完了しました" . $fileData['name'];
     } else {
         // エラーメッセージを表示
-        echo '<h3 style="color:red;">' .$fileName.$result. '</h3>';
+        //echo '<h3 style="color:red;">' .$fileName.$result. '</h3>';
+        $results[] = "アップロードに失敗しました" . $fileData['name'] . "：" . $status;
     }
   }
 
+  if (empty($results)) {
+    echo "ファイルが選択されていません。";
+  } else {
+      echo implode("\n", $results); // 改行区切りで結合
+  }
+
 } else {
-  echo '<h3>ファイルが送信されていません。</h3>';
+  echo 'ファイルが送信されていません。';
 }
 
-?>
 
 
-<a href="form.html" style="margin-left: 60%;">戻る</a> 
-<a href="show.php" style="margin-left:10px;">一覧へ</a> 
-
-
-</body>
-</html>

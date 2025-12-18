@@ -1,59 +1,84 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../css/style.css">
     <title>ファイル一覧</title>
 </head>
+
 <body>
 <?php
+include 'menu.php';
+require_once 'get_csv.php';
 
-   echo '<div class="Mcontainer">';
-   $filePath_csv='../csv/file.csv';
-   $file_csv = fopen($filePath_csv, "r");
-   $csv_data = [];
-   // CSVをすべて読み込み、配列に格納（キー: ファイル名, 値: 説明）
-   while ($line = fgets($file_csv)) {
-        $parts = explode(",", trim($line));
-        $csv_data[$parts[0]] = $parts[1];
-    }
-    
-   $count = 0;
-   $filePath='../file';
-   $file = glob("../file/*.pdf");//fileの中のpdfのみ
-   $files=count($file); 
-   while($count < $files){//ファイルすべてを表示させる
-    echo '<div class="Scontainer">';
-       $file_name = basename($file[$count]);
-       
-       
-       if(isset($csv_data[$file_name])){
-        $file_summary = $csv_data[$file_name];
-        echo $file_summary.'<br>';
-        echo '<a href = "../file/'.$file_name.'"  download="'.$file_summary.'">ダウンロード</a>';
-       
-       }else{
-        echo "説明なし".'<br>';
-        echo '<a href = "../file/'.$file_name.'"  download="未名称">ダウンロード</a>';
-     }
-     
-       echo '<form action="delete.php"  method="post" >';
-       echo '<input type="hidden" name="delete" value="'.$file_name.'">';
-       echo '<button type="submit" onclick="return confirm(\''.$file_summary.'のファイルを本当に削除しますか？\')">削除</button>';
-       echo'</form>';
-       
-       $count++ ;
-       echo'</div>';
-   }
-   
-   
-   echo'</div>';
+//$csv_path= '../csv/file.csv';
+$csv_data = GetData();
+
+echo '<div class="list" style="margin-top:70px;">';
+    echo '<div style="width:40%">ファイル説明</div>';
+    echo '<div style="width:20%">ジャンル</div>';
+    echo '<div style="20%"></div>';
+    echo '<div style="20%"></div>';
+echo '</div>';
+echo '<hr>';
+
+//fileの中のpdfのみ
+$files = glob("../file/*.pdf"); 
+foreach($files as $file_path){
+    $file_name = basename($file_path);
+    // CSVからデータを取得
+    $info = $csv_data[$file_name] ?? ['summary' => '説明なし', 'genre' => '未分類'];
+    $file_summary = $info['summary'] ?? '';
+    $file_genre = $info['genre'] ?? '';
+    echo '<div class="list">';
+        echo '<div style="width:40%">' . htmlspecialchars($file_summary) . '</div>'; // 説明
+        echo '<div style="width:20%">' . htmlspecialchars($file_genre) . '</div>'; // ジャンル
+
+        echo '<div style="width:20%">';
+        echo '<a href="' . $file_path . '" download="' . $file_summary . '">ダウンロード</a>';
+        echo '</div>';
+        
+        echo '<div style="width:20%">';
+        echo '<form action="delete.php" method="post" class="delete-form">';
+        echo '<input type="hidden" name="delete" value="' . $file_name . '">';
+        echo '<button type="submit" onclick="return confirm(\'' . $file_summary . 'を削除しますか？\')">削除</button>';
+        echo '</form>';
+        echo '</div>';
+    echo '</div>';
+    echo '<hr>';
+}
 
 ?>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    
-<div class="list_btn">
-<a href="./form.html">アップロードフォームへ</a>
-</div>
+<script>
+    $(function() {
+    $('.delete-form').on('submit', function(e) {
+        e.preventDefault(); 
+
+        var formData = new FormData(this); 
+
+        $.ajax({
+            url: 'delete.php', 
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                alert(response); 
+                if(response.includes("")) {
+                    location.reload(); 
+                }
+            },
+            error: function() {
+                alert("");
+            }
+        });
+    });
+});
+</script>
+  
 </body>
+
 </html>

@@ -8,7 +8,7 @@ class FileUploader {
   private $max_size = 20 * 1024 * 1024; 
 
   
-  public function Upload($file, $summary){
+  public function Upload($file, $summary,$genre){
     //エラーの場合
     if(!isset($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])||$file['error'] !== UPLOAD_ERR_OK){ 
       return "アップロードに失敗しました。"; 
@@ -43,16 +43,19 @@ class FileUploader {
     //$md_=$this->upload_path . $new_name.'.pdf';
     //ファイルの移動
     if(move_uploaded_file($tmp_file, $md_file)){
-      $this->SaveCsv($new_name, $summary);
+      $this->SaveCsv($new_name, $summary,$genre);
       return true;
     }
     return "ファイルの移動に失敗しました。";
   }
   
-  function SaveCsv($filename, $summary) {
+  function SaveCsv($filename, $summary,$genre) {
     //ファイルに追記
     $fp = fopen($this->csv_path, "a");
-    fputcsv($fp, [$filename, $summary]);
+    if (flock($fp, LOCK_EX)) {
+      fputcsv($fp, [$filename, $summary, $genre]);
+      flock($fp, LOCK_UN);
+    }
     fclose($fp);
   }
 }
