@@ -24,7 +24,7 @@ if (isset($_FILES['files'])) {
     $genre = $_POST['genre'][$i] ?? '未分類';
 
     // クラスのメソッド呼び出し
-    $result = $uploader->Upload($fileData, $summary,$genre);
+    $result = $uploader->upload($fileData, $summary,$genre);
     $fileName = htmlspecialchars($fileData['name']);
 
     // 結果の判定
