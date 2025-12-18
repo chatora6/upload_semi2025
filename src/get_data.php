@@ -11,12 +11,19 @@ function GetData() {
     while (($line = fgetcsv($csv_r))!== FALSE) {
         // $line[0]:ファイル名, $line[1]:説明, $line[2]:ジャンル
         //$line = explode(",", trim($line));
-        $data_list[$line[0]] = [
+        /*$data_list[$line[0]] = [
             'summary' => $line[1] ?? '',
-            'genre'   => $line[2] ?? '未分類'
+            'genre'   => $line[2] ?? '未分類',
+            'time'    => $line[3] ?? '不明'
+        ];*/
+        $data_list[] = [
+            'name'  => $line[0] ?? '',
+            'summary' => $line[1] ?? '',
+            'genre'   => $line[2] ?? '未分類',
+            'time'    => $line[3] ?? '不明'
         ];
     }
-    
+
     fclose($csv_r);
     return $data_list;
 }

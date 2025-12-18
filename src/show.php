@@ -10,7 +10,7 @@
 <body>
 <?php
 include 'menu.php';
-require_once 'get_csv.php';
+require_once 'get_data.php';
 
 $target_genre = $_GET['genre'] ?? 'すべて';
 
@@ -26,14 +26,19 @@ echo '<div class="list" style="margin-top:70px;">';
 echo '</div>';
 echo '<hr>';
 
-//fileの中のpdfのみ
-$files = glob("../file/*.pdf"); 
-foreach($files as $file_path){
-    $file_name = basename($file_path);
+//fileの中のpdfのみ探す
+//$files = glob("../file/*.pdf"); 
+
+//一覧で表示
+foreach($csv_data as $i => $file_path){
+    //$file_name = basename($file_path);
     // CSVからデータを取得
-    $info = $csv_data[$file_name] ?? ['summary' => '説明なし', 'genre' => '未分類'];
+    //$info = $csv_data[$file_name] ?? ['summary' => '説明なし', 'genre' => '未分類', 'time' => '不明'];
+    $info = $csv_data[$i] ?? ['name' => '','summary' => '説明なし', 'genre' => '未分類', 'time' => '不明'];
+    $file_name = $info['name'] ?? '';
     $file_summary = $info['summary'] ?? '';
     $file_genre = $info['genre'] ?? '';
+    $file_time = $info['time'] ?? '';
 
     //すべて表示でないときとジャンルが一致しないときはスキップ
     if($target_genre !== 'すべて' && $file_genre !== $target_genre){
@@ -45,7 +50,7 @@ foreach($files as $file_path){
         echo '<div style="width:20%">' . htmlspecialchars($file_genre) . '</div>'; // ジャンル
 
         echo '<div style="width:20%">';
-        echo '<a href="' . $file_path . '" download="' . $file_summary . '">ダウンロード</a>';
+        echo '<a href="' . $file_name . '" download="' . $file_summary . '">ダウンロード</a>';
         echo '</div>';
         
         echo '<div style="width:20%">';
