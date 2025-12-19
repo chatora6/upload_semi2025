@@ -12,6 +12,7 @@
       <span class="line"></span>
   </button>
   <div class="menu_content">
+    <li><a href="form.php" style="color:white">新規アップロード</a></li>
     <li><a href="show.php?genre=すべて">すべてのファイル</a></li>
     <li><a href="show.php?genre=業務マニュアル・手順書">業務マニュアル・手順書</a></li>
     <li><a href="show.php?genre=研修・教育資料">研修・教育資料</a></li>
@@ -20,7 +21,6 @@
     <li><a href="show.php?genre=本部共有資料">本部共有資料</a></li>
     <li><a href="show.php?genre=レシピ">レシピ</a></li>
     <li><a href="show.php?genre=その他">その他</a></li>
-    <li><a href="form.php">新規アップロード</a></li>
   </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

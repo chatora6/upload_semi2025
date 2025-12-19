@@ -1,52 +1,90 @@
 body{
-    background-color: #cfe4de;
+    background-color: #e6dbd5;
     font-family:'Courier New', Courier, monospace
 }
 
-
+/*フォーム*/
 .form_container{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 80vw;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
-    background-color: #f6fffc;
+    background-color: #fffdfb;
     border-radius: 10px;
     padding:20px 0 20px 0 ;
-    color: rgb(85, 68, 68);
+    color: #5e3016;
 }
 
-.up_form{
+.form_container hr{
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
 }
 
-.up_btn{
+.align_content{
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 30px 0;
 }
 
-#up_btn{
-    background-color: #a8e4d3;
-    border: none;
-    border-radius: 15px;
-    width: 200px;
-    cursor: pointer;
-    padding:10px 0 10px 0 ;
-}
-
-
-.upload_text{
-    width: 100%;
-    margin-top: 10%;
+.align_content a{
+    width: 40%;
     text-align: center;
 }
 
-.list{
+.item{
+    width: 50%;
+    cursor: pointer;
+}
+
+.radio {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.radio input{
+    margin-bottom: 8px;
+}
+
+#up_btn{
+    background-color: #e4caa8;
+    border: none;
+    border-radius: 15px;
     width: 80%;
+    min-width: 400px;
+    cursor: pointer;
+    padding:10px 0 ;
+}
+
+
+
+/*ファイル一覧*/
+.sort-select {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#sort-select {
+    font-size: large;
+    border: none;
+    background: none;
+    border-bottom: solid 1px #5e3016;
+    color: #5e3016;
+}
+
+
+.list{
+    width: 90%;
+    max-width: 900px;
     display: flex;
     flex-direction:row;
     align-items: center;
@@ -55,7 +93,35 @@ body{
     margin-right: auto;
 }
 
+.btn-download {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #eea574;
+    color: white;
+    text-decoration: none; 
+    border-radius: 5px;    
+    transition: background-color 0.3s;
+}
 
+.btn-download:hover {
+    background-color: #ffa24b; 
+}
+
+.btn-delete {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #c2bbb4;
+    text-decoration: none; 
+    border-radius: 5px;   
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #f39191; 
+}
+
+/*メニュー*/
 .nav-container {
     position: fixed;
     display: flex;
@@ -65,7 +131,7 @@ body{
     right: 5px;
     width: 50px;  
     height: 50px; 
-    background-color: #b9d3c0; 
+    /*background-color: #b9d3c0; */
     border-radius: 10px;
     z-index: 3;
     overflow: hidden; 
@@ -77,10 +143,11 @@ body{
 }
 
 .nav-container.open {
-    width: 30vw; 
+    width: 50vw; 
     max-width: 300px;
     height: 90vh; 
-    background-color: #b9d3c0; 
+    background-color: #cfa38cef;
+    
 }
 
 .menu_icon {
@@ -113,10 +180,11 @@ body{
 }
 
 .menu_content li{
+    width: 85%;
     list-style:none;
-    padding-bottom: 10px;
     font-size: large;
-    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: solid 1px#4b371e;
 }
   
 .menu_content li a {

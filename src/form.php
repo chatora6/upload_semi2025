@@ -9,48 +9,33 @@
 <?php
 include 'menu.php';
 ?>
-<div class = "form_container">
-  
-  <form action="upload.php" enctype="multipart/form-data" method="post" class="up_form">
-    <table>
-    <tr><th>ファイル1</th><td>
-    <input name="files[]" type="file">
-    <tr><th><a>表示名1</a></th>
-    <td><input type="text" name="summary[]" class="form"></td></tr>
-    <tr><th><a>ジャンル</a></jth>
-    <td><select name="genre[]">
-      <option value="">選択してください</option>
-      <option value="業務マニュアル・手順書">業務マニュアル・手順書</option>
-      <option value="研修・教育資料">研修・教育資料</option>
-      <option value="店舗ルール">店舗ルール</option>
-      <option value="本部共有資料">本部共有資料</option>
-      <option value="レシピ">レシピ</option>
-      <option value="その他">その他</option>
-    </select></td></tr>
-    </table>
+<form action="upload.php" enctype="multipart/form-data" method="post" class="form_container">
+  <h2>アップロードフォーム</h2>
+  <div class="align_content">
+    <a>表示されるファイル名<span style="color: red;">*</span></a>
+    <input type="text" name="summary[]" class="item" placeholder="20字以内で入力してください。" maxlength="20" required>
+  </div><hr>
+  <div class="align_content">
+    <a>ファイル<span style="color: red;">*</span></a>
+    <input name="files[]" type="file" class="item" required>
+  </div><hr>
+  <div class="align_content">
+    <a>区分<span style="color: red;">*</span></a>
+    <div class="radio">
+    <div><input type="radio" name="genre[]" value="業務マニュアル・手順書" checked>業務マニュアル・手順書</div>
+    <div><input type="radio" name="genre[]" value="研修・教育資料">研修・教育資料</div>
+    <div><input type="radio" name="genre[]" value="店舗ルール">店舗ルール</div>
+    <div><input type="radio" name="genre[]" value="本部共有資料">本部共有資料</div>
+    <div><input type="radio" name="genre[]" value="レシピ">レシピ</div>
+    <div><input type="radio" name="genre[]" value="その他">その他</div>
+    </div>
+  </div>
 
-    <table>
-    <tr><th>ファイル1</th><td>
-    <input name="files[]" type="file">
-    <tr><th><a>表示名1</a></th>
-    <td><input type="text" name="summary[]" class="form"></td></tr>
-    <tr><th><a>ジャンル</a></jth>
-    <td><select name="genre[]">
-      <option value="">選択してください</option>
-      <option value="業務マニュアル・手順書">業務マニュアル・手順書</option>
-      <option value="研修・教育資料">研修・教育資料</option>
-      <option value="店舗ルール">店舗ルール</option>
-      <option value="本部共有資料">本部共有資料</option>
-      <option value="レシピ">レシピ</option>
-      <option value="その他">その他</option>
-    </select></td></tr>
-    </table>
-
-  <div class="up_btn"><br>
+  <div class=".align_content">
     <input type="submit" value="アップロード" id="up_btn">
   </div>
-  </form>
-  </div>
+</form>
+
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
