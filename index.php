@@ -1,3 +1,3 @@
 <?php
-header('Location: src/form.php');
+header('Location: src/login.php');
 exit;
