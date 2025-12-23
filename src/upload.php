@@ -21,7 +21,7 @@ if (isset($_FILES['files'])) {
     ];
 
     $summary = $_POST['summary'][$i] ?? '';
-    $genre = $_POST['genre'][$i] ?? '未分類';
+    $genre = $_POST['genre'.$i] ?? '未分類';
 
     // クラスのメソッド呼び出し
     $result = $uploader->upload($fileData, $summary,$genre,$i);
