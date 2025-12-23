@@ -47,32 +47,31 @@ $order = $_GET['sort'] ?? 'new';
 
 $timeAsc = strtotime($a['time']) - strtotime($b['time']);
 $timeDesc = strtotime($b['time']) - strtotime($a['time']);
-$summaryAsc =strcmp($a['summary'], $b['summary']);
-$summaryDesc =strcmp($b['summary'], $a['summary']);
+//$summaryAsc =strcmp($a['summary'], $b['summary']);
+//$summaryDesc =strcmp($b['summary'], $a['summary']);
 
 switch ($order) {
     case 'old': 
         $diff = $timeAsc;
-        if ($diff === 0) $diff = $summaryAsc;
+        //if ($diff === 0) $diff = $summaryAsc;
         return $diff;
-    
+    /*
     case 'summary_asc':
         $diff = $summaryAsc;
-        if ($diff === 0) $diff = $timeAsc;
+        //if ($diff === 0) $diff = $timeAsc;
         return $diff;
         
 
     case 'summary_desc': 
-        
         $diff = $summaryDesc;
-        if ($diff === 0) $diff = $timeAsc;
+        //if ($diff === 0) $diff = $timeAsc;
         return $diff;
-
+    */
     case 'new':
     default:
         
         $diff = $timeDesc;
-        if ($diff === 0) $diff = $summaryAsc;
+        //if ($diff === 0) $diff = $summaryAsc;
         return $diff;
 }
 }
