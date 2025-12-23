@@ -1,6 +1,7 @@
 body{
-    background-color: #e6dbd5;
-    font-family:'Courier New', Courier, monospace
+    background-color: #d5dfe6;
+    font-family:'Courier New', Courier, monospace;
+    color:#47220c;
 }
 
 /*フォーム*/
@@ -13,7 +14,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     margin-top: 10%;
-    background-color: #fffdfb;
+    background-color: #fbfdff;
     border-radius: 10px;
     padding:20px 0 20px 0 ;
     color: #5e3016;
@@ -54,7 +55,7 @@ body{
 }
 
 #up_btn{
-    background-color: #e4caa8;
+    background-color: #bcd0dd;
     border: none;
     border-radius: 15px;
     width: 80%;
@@ -81,6 +82,16 @@ body{
     color: #5e3016;
 }
 
+.list-title{
+    display:flex; 
+    flex-direction:row;
+    width: 90%; 
+    max-width: 900px; 
+    margin-left: auto;
+    margin-right: auto;
+    text-align:start;
+    font-weight: bold;
+}
 
 .list{
     width: 90%;
@@ -91,12 +102,14 @@ body{
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
+    white-space: normal;
+    overflow-wrap: break-word;
 }
 
 .btn-download {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #eea574;
+    background-color: #86b5d4;
     color: white;
     text-decoration: none; 
     border-radius: 5px;    
@@ -104,13 +117,13 @@ body{
 }
 
 .btn-download:hover {
-    background-color: #ffa24b; 
+    background-color: #fab778; 
 }
 
 .btn-delete {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #c2bbb4;
+    background-color: #b4b9c2;
     text-decoration: none; 
     border-radius: 5px;   
     border: none;
@@ -146,7 +159,7 @@ body{
     width: 50vw; 
     max-width: 300px;
     height: 90vh; 
-    background-color: #cfa38cef;
+    background-color: #b2c6cfea;
     
 }
 
@@ -184,11 +197,12 @@ body{
     list-style:none;
     font-size: large;
     margin-bottom: 25px;
-    border-bottom: solid 1px#4b371e;
+    border-bottom: solid 1px#522e0e;
+    
 }
   
 .menu_content li a {
-color: #4b371e; 
+color: #522e0e;
 text-decoration: none; 
 }
 
@@ -200,7 +214,7 @@ text-decoration: none;
 .line {
     width: 30px;
     height: 1px;
-    background-color: #644d32;
+    background-color: #522e0e;
     transition: transform 0.3s, opacity 0.3s;
     border-radius: 2px;
 }
@@ -213,4 +227,13 @@ text-decoration: none;
   }
   .nav-container.open .line:nth-child(3) {
     transform: translateY(-18px) rotate(-45deg);
+  }
+
+  /*ログイン画面*/
+  .login-container {
+    background-color: #fffdfb;
+    width: 300px; 
+    margin: 100px auto; 
+    padding: 20px; 
+    border: 1px solid #ccc;
   }
