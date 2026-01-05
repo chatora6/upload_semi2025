@@ -3,10 +3,12 @@ require_once 'process_data.php';
 
 // クラスのインスタンス化
 $uploader = new FileUploader();
+$results = [];
 
 if (isset($_FILES['files'])) {
   $count = count($_FILES['files']['name']);
 
+  
   for ($i = 0; $i < $count; $i++) {
     if ($_FILES['files']['error'][$i] === UPLOAD_ERR_NO_FILE) {
       continue;
@@ -24,11 +26,12 @@ if (isset($_FILES['files'])) {
     $genre = $_POST['genre'.$i] ?? '未分類';
 
     // クラスのメソッド呼び出し
-    $result = $uploader->upload($fileData, $summary,$genre,$i);
+    $status = $uploader->upload($fileData, $summary,$genre,$i);
     $fileName = htmlspecialchars($fileData['name']);
 
+
     // 結果の判定
-    if ($result === true) {
+    if ($status === true) {
         //echo '<h3>'.$fileName.'アップロード完了しました</h3>';
         $results[] = "アップロード完了しました" . $fileData['name'];
     } else {
@@ -36,6 +39,7 @@ if (isset($_FILES['files'])) {
         //echo '<h3 style="color:red;">' .$fileName.$result. '</h3>';
         $results[] = "アップロードに失敗しました" . $fileData['name'] . "：" . $status;
     }
+
   }
 
   if (empty($results)) {
@@ -43,9 +47,13 @@ if (isset($_FILES['files'])) {
   } else {
       echo implode("\n", $results); // 改行区切りで結合
   }
+  
 
 } else {
   echo 'ファイルが送信されていません。';
+  if($_SERVER['CONTENT_LENGTH'] > 0){
+    echo 'ファイルサイズを確認してください。';
+  }
 }
 
 

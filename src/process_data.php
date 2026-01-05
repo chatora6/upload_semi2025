@@ -7,6 +7,7 @@ class FileUploader
   private $allowedExt = array( 'pdf' );
   //ファイルの上限指定
   private $maxSize = 20 * 1024 * 1024; 
+   
 
   
   public function upload($file, $summary,$genre,$i = 0){
@@ -32,7 +33,7 @@ class FileUploader
         return "PDFファイルのみアップロード可能です。";
       }
     //ファイルサイズの確認
-    if(!$file['size'] > $this->maxSize){
+    if($file['size'] > $this->maxSize){
       return "ファイルサイズが20MBを超えています。";
     }
 
