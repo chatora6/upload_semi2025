@@ -35,7 +35,7 @@ echo '<main style="max-width: 900px; margin: 80px auto; padding: 0 20px;">';
                 echo '<td><span class="badge">' . $genre . '</span></td>';
                 echo '<td><strong>' . $summary . '</strong></td>';
                 echo '<td style="text-align: right;">';
-                    echo '<a href="' . $filePath . '" class="btn">確認</a>';
+                    echo '<a href="' . $filePath . '" class="btn" target="_blank">確認</a>';
                 echo '</td>';
             echo '</tr>';
         }

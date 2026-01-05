@@ -22,7 +22,7 @@ if (isset($_SESSION['user_name'])) {
         ?>
         <form action="auth_check.php" method="post">
             <div style="margin-bottom: 10px;">
-                <label>ユーザーID</label><br>
+                <label>ユーザID</label><br>
                 <input type="text" name="user_id" required style="width: 100%;">
             </div>
             <div style="margin-bottom: 10px;">

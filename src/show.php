@@ -40,7 +40,7 @@ echo '</div>';
 echo '<div class="list-title" >';
     echo '<div style="width:30%">ファイル説明</div>';
     echo '<div style="width:20%">ジャンル</div>';
-    echo '<div style="width:20%">日時</div>';
+    echo '<div style="width:20%">日付</div>';
     echo '<div style="30%">　</div>';
 echo '</div>';
 

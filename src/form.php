@@ -15,7 +15,7 @@ include 'menu.php';
 <form action="upload.php" enctype="multipart/form-data" method="post" class="form_container">
   <h2>アップロードフォーム</h2>
   <div class="align_content">
-    <a>表示されるファイル名<span style="color: red;">*</span></a>
+    <a>ファイル説明<span style="color: red;">*</span></a>
     <input type="text" name="summary[]" class="item" placeholder="20字以内で入力してください。" maxlength="20" required>
   </div><hr>
   <div class="align_content">
@@ -23,7 +23,7 @@ include 'menu.php';
     <input name="files[]" type="file" class="item" required>
   </div><hr>
   <div class="align_content">
-    <a>区分<span style="color: red;">*</span></a>
+    <a>ジャンル<span style="color: red;">*</span></a>
     <div class="radio">
     <div><input type="radio" name="genre0" value="業務マニュアル" checked>業務マニュアル</div>
     <div><input type="radio" name="genre0" value="研修・教育資料">研修・教育資料</div>
@@ -39,7 +39,7 @@ include 'menu.php';
   <label><input type="checkbox" id="add-file-check" onchange="toggleExtraFile()"> もう一つファイルを追加する</label><br>
   <div id="extra-file-area" style="display: none; width:100%">
   <div class="align_content" >
-    <a>表示されるファイル名<span style="color: red;">*</span></a>
+    <a>ファイル説明<span style="color: red;">*</span></a>
     <input type="text" name="summary[]" class="item" placeholder="20字以内で入力してください。" maxlength="20">
   </div><hr>
   <div class="align_content">
@@ -47,7 +47,7 @@ include 'menu.php';
     <input name="files[]" type="file" class="item">
   </div><hr>
   <div class="align_content">
-    <a>区分<span style="color: red;">*</span></a>
+    <a>ジャンル<span style="color: red;">*</span></a>
     <div class="radio">
     <div><input type="radio" name="genre1" value="業務マニュアル" checked>業務マニュアル</div>
     <div><input type="radio" name="genre1" value="研修・教育資料">研修・教育資料</div>
@@ -101,6 +101,10 @@ function toggleExtraFile() {
     
     if (checkBox.checked) {
         extraArea.style.display = 'block';
+        const inputs = extraArea.querySelectorAll('input, textarea, select');
+          inputs.forEach(input => {
+          input.required = true;
+        });
     } else {
         extraArea.style.display = 'none';
         extraArea.querySelector('input').value = '';
